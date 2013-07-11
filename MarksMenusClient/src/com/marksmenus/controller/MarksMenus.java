@@ -25,7 +25,7 @@ public class MarksMenus implements APIMap {
 		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 		URL addr;
 		XMLReader xmlReader;
-		handler = new RestaurantHandler();
+		handler = new RestaurantHandler(restaurants);
 		// Limit distance to <= 5.  This prevents the server from getting hammered.
 		if(distance > 5){
 			distance = 5;

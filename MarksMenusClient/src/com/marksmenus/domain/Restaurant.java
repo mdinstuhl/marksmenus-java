@@ -7,8 +7,8 @@ public class Restaurant {
 
 	private String name = new String();
 	private int id;
-	private long lat;
-	private long lng;
+	private double lat;
+	private double lng;
 	private String description = new String();
 	private String address = new String();
 	private String hours = new String();
@@ -29,16 +29,16 @@ public class Restaurant {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public long getLat() {
+	public double getLat() {
 		return lat;
 	}
-	public void setLat(long lat) {
+	public void setLat(double lat) {
 		this.lat = lat;
 	}
-	public long getLng() {
+	public double getLng() {
 		return lng;
 	}
-	public void setLng(long lng) {
+	public void setLng(double lng) {
 		this.lng = lng;
 	}
 	public String getDescription() {
