@@ -17,13 +17,14 @@ public class MarksMenus implements APIMap {
 	ContentHandler handler;
 	
 	@Override
-	public ArrayList<Restaurant> findRestuarantsByLocation(long lat, long lng,
+	public ArrayList<Restaurant> findRestuarantsByLocation(double lat, double lng,
 			int distance) {
 		
 
 		
 		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 		URL addr;
+		String url = new String();
 		XMLReader xmlReader;
 		handler = new RestaurantHandler(restaurants);
 		// Limit distance to <= 5.  This prevents the server from getting hammered.
@@ -33,7 +34,9 @@ public class MarksMenus implements APIMap {
 		
 		// Populate the query string, create the reader and make the request to the server
 		try{
-			addr = new URL("http://www.marksmenus.com/search.xml?query=&lat=" + lat + "&lng=" + lng + "&within=" + distance);
+			url = "http://www.marksmenus.com/search.xml?query=&lat=" + lat + "&lng=" + lng + "&within=" + distance;
+			addr = new URL(url);
+			System.out.println(url);
 			xmlReader = XMLReaderFactory.createXMLReader();
 			xmlReader.setContentHandler(handler);
 			xmlReader.parse(new InputSource(addr.openStream()));
