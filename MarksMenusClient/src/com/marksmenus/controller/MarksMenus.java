@@ -8,13 +8,29 @@ import com.marksmenus.domain.MenuItem;
 import com.marksmenus.domain.Restaurant;
 import com.marksmenus.handlers.*;
 import org.xml.sax.*;
-import org.xml.sax.ContentHandler;
 import org.xml.sax.helpers.XMLReaderFactory;
+
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
+import java.net.URLConnection;
 
 public class MarksMenus implements APIMap {
 
 	ContentHandler handler;
+	String proxyURL;
+	int proxyPort;
+	boolean usesProxy = false;
+	
+	public MarksMenus(){
+		
+	}
+	
+	public MarksMenus(String proxyURL, int proxyPort){
+		this.proxyURL = proxyURL;
+		this.proxyPort = proxyPort;
+		this.usesProxy = true;
+	}
 	
 	@Override
 	public ArrayList<Restaurant> findRestuarantsByLocation(double lat, double lng,
@@ -24,6 +40,7 @@ public class MarksMenus implements APIMap {
 		
 		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 		URL addr;
+		URLConnection conn;
 		String url = new String();
 		XMLReader xmlReader;
 		handler = new RestaurantHandler(restaurants);
@@ -37,13 +54,19 @@ public class MarksMenus implements APIMap {
 			url = "http://www.marksmenus.com/search.xml?query=&lat=" + lat + "&lng=" + lng + "&within=" + distance;
 			addr = new URL(url);
 			System.out.println(url);
+			if(this.usesProxy){
+			  conn = addr.openConnection(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(this.proxyURL, this.proxyPort)));
+			} else {
+				conn = addr.openConnection();	
+			}
 			xmlReader = XMLReaderFactory.createXMLReader();
 			xmlReader.setContentHandler(handler);
-			xmlReader.parse(new InputSource(addr.openStream()));
+			xmlReader.parse(new InputSource(conn.getInputStream()));
 			// Get the populated arraylist back from the handler.
+			
 		}
 		catch(Exception e){
-			
+			e.printStackTrace();
 		}
 		
 		return restaurants;
