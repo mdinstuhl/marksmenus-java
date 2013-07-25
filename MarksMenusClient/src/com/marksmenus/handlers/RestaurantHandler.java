@@ -25,12 +25,12 @@ public class RestaurantHandler implements ContentHandler {
 	public void characters(char[] ch, int start, int length)
 			throws SAXException {
 		 String premium = "";
-		 System.out.println("Inside characters.  lastName=" + lastName);
+		 //System.out.println("Inside characters.  lastName=" + lastName);
 		 if(lastName.equals("name") && restaurant.getName().length() == 0)
 		 {
-			 System.out.println("About to set restaurant name..");
+			 //System.out.println("About to set restaurant name..");
 			 restaurant.setName(String.copyValueOf(ch, start, length));
-			 System.out.println("Restaurant name set to " + restaurant.getName());
+			 //System.out.println("Restaurant name set to " + restaurant.getName());
 		 }
 		 else if(lastName.equals("description") && restaurant.getDescription().length() == 0)
 		 {

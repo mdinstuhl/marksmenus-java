@@ -73,10 +73,42 @@ public class MarksMenus implements APIMap {
 	}
 
 	@Override
-	public ArrayList<Restaurant> findRestaurantsByKeyword(long lat, long lng,
+	public ArrayList<Restaurant> findRestaurantsByKeyword(double lat, double lng,
 			int distance, String keyword) {
-		// TODO Auto-generated method stub
-		return null;
+
+		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+		URL addr;
+		URLConnection conn;
+		String url = new String();
+		XMLReader xmlReader;
+		handler = new RestaurantHandler(restaurants);
+		// Limit distance to <= 5.  This prevents the server from getting hammered.
+		if(distance > 5){
+			distance = 5;
+		}		
+		
+		// Populate the query string, create the reader and make the request to the server
+		try{
+			url = "http://www.marksmenus.com/search.xml?query=" + keyword +  "&lat=" + lat + "&lng=" + lng + "&within=" + distance;
+			addr = new URL(url);
+			System.out.println(url);
+			if(this.usesProxy){
+			  conn = addr.openConnection(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(this.proxyURL, this.proxyPort)));
+			} else {
+				conn = addr.openConnection();	
+			}
+			xmlReader = XMLReaderFactory.createXMLReader();
+			xmlReader.setContentHandler(handler);
+			xmlReader.parse(new InputSource(conn.getInputStream()));
+			// Get the populated arraylist back from the handler.
+			
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return restaurants;		
+		
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public interface APIMap {
 
 	public ArrayList<Restaurant> findRestuarantsByLocation(double lat, double lng, int distance);
-	public ArrayList<Restaurant> findRestaurantsByKeyword(long lat, long lng, int distance, String keyword);
+	public ArrayList<Restaurant> findRestaurantsByKeyword(double lat, double lng, int distance, String keyword);
 	public Restaurant getRestaurant(int id);
 	public Menu getMenu(int id);
 	public MenuCategory getMenuCategory(int id);

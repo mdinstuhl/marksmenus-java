@@ -28,12 +28,22 @@ public class MarksMenusTest {
 			fail(e.getMessage());
 		}
 		
-		//fail("Not yet implemented");
 	}
 
 	@Test
 	public void testFindRestaurantsByKeyword() {
-		fail("Not yet implemented");
+		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+		MarksMenus mmClient = new MarksMenus();
+		
+		try{
+			restaurants = mmClient.findRestaurantsByKeyword(35.1494, -90.0489, 5, "chicken");
+			if(restaurants.size() == 0){
+				fail("No restaurants returned");
+			} 
+		}
+		catch(Exception e){
+			fail(e.getMessage());
+		}
 	}
 
 	@Test
