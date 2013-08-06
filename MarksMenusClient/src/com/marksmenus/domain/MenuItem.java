@@ -3,20 +3,20 @@ package com.marksmenus.domain;
 
 public class MenuItem {
 
-	private int id;
+	private String id;
 	private String name = new String();
-	private long price;
+	private String price;
 	private String description = new String();
-	private long rating;
+	private double rating;
 	private int ratingCount;
 	private String searchTags = new String();
 	private String pictureURL = new String();
 	
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -25,10 +25,10 @@ public class MenuItem {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public long getPrice() {
+	public String getPrice() {
 		return price;
 	}
-	public void setPrice(long price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	public String getDescription() {
@@ -37,10 +37,10 @@ public class MenuItem {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public long getRating() {
+	public double getRating() {
 		return rating;
 	}
-	public void setRating(long rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
 	public int getRatingCount() {

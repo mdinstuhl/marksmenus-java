@@ -16,7 +16,7 @@ public class MarksMenusTest {
 	public void testFindRestuarantsByLocation() {
 		
 		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-		MarksMenus mmClient = new MarksMenus("internet.proxy.fedex.com", 3128);
+		MarksMenus mmClient = new MarksMenus();
 		
 		try{
 			restaurants = mmClient.findRestuarantsByLocation(35.1494, -90.0489, 5);
@@ -33,7 +33,7 @@ public class MarksMenusTest {
 	@Test
 	public void testFindRestaurantsByKeyword() {
 		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-		MarksMenus mmClient = new MarksMenus("internet.proxy.fedex.com", 3128);
+		MarksMenus mmClient = new MarksMenus();
 		
 		try{
 			restaurants = mmClient.findRestaurantsByKeyword(35.1494, -90.0489, 5, "chicken");
@@ -49,7 +49,7 @@ public class MarksMenusTest {
 	@Test
 	public void testGetRestaurant() {
 		Restaurant restaurant;
-		MarksMenus mmClient = new MarksMenus("internet.proxy.fedex.com", 3128);
+		MarksMenus mmClient = new MarksMenus();
 		try{
 			restaurant = mmClient.getRestaurant(46);
 			
