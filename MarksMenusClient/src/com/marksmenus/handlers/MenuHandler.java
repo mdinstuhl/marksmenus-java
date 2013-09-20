@@ -77,34 +77,34 @@ public class MenuHandler implements ContentHandler {
 					break;
 				case 'i':
 					if(menuItem.getDescription().length() == 0 && foundCData){
-						System.out.println("Setting description for menu item " + menuItem.getName());
+						//System.out.println("Setting description for menu item " + menuItem.getName());
 						
-						System.out.println("Description SHOULD be " + cdata);
+						//System.out.println("Description SHOULD be " + cdata);
 						menuItem.setDescription(cdata);
-						System.out.println("Description set for menu item " + menuItem.getName() + " - " + menuItem.getDescription());
+						//System.out.println("Description set for menu item " + menuItem.getName() + " - " + menuItem.getDescription());
 					}
 					break;
 			}
 		 }else if(lastName.equals("rating")){
-			System.out.println("About to set the rating of menu item " + menuItem.getName());
+			//System.out.println("About to set the rating of menu item " + menuItem.getName());
 			try{
 				menuItem.setRating(Double.parseDouble(String.copyValueOf(ch,start,length)));
 			} catch (Exception e){
-				System.out.println("Setting rating failed.");
+				//System.out.println("Setting rating failed.");
 			}
-			System.out.println("Rating for menu item " + menuItem.getName() + " has been set.");
+			//System.out.println("Rating for menu item " + menuItem.getName() + " has been set.");
 			
 		}else if(lastName.equals("rating_count")){
-			System.out.println("About to set the rating count of menu item " + menuItem.getName());
+			//System.out.println("About to set the rating count of menu item " + menuItem.getName());
 			try{
 				menuItem.setRatingCount(Integer.parseInt(String.copyValueOf(ch,start,length)));
 			} catch(Exception e){
-				System.out.println("Rating count not set for menu item " + menuItem.getName());
+				//System.out.println("Rating count not set for menu item " + menuItem.getName());
 			}
-			System.out.println("Rating for menu item " + menuItem.getName() + " has been set.");
+			//System.out.println("Rating for menu item " + menuItem.getName() + " has been set.");
 			
 		}else if(lastName.equals("price") && menuItem.getPrice().length() == 0){
-			System.out.println("About to set price.");
+			//System.out.println("About to set price.");
 			menuItem.setPrice(String.copyValueOf(ch,start,length));
 		}else if(lastName.equals("picture_url") && menuItem.getPictureURL().length() == 0){
 			menuItem.setPictureURL(String.copyValueOf(ch,start,length));
@@ -124,7 +124,7 @@ public class MenuHandler implements ContentHandler {
 			throws SAXException {
 
 		 if(localName.equals("menu")){
-			 System.out.println("endElement - about to add menu to restaurant");
+			 //System.out.println("endElement - about to add menu to restaurant");
 			 if(menu != null){
 				 //Globals.currentRestaurant.menus.add(menu);
 			 }
@@ -181,7 +181,7 @@ public class MenuHandler implements ContentHandler {
 			Attributes atts) throws SAXException {
 
 		String type;
-		System.out.println("Setting lastName to " + localName);
+		//System.out.println("Setting lastName to " + localName);
 		lastName = localName;
 		currentElement.push(qName);
 		if(localName.equals("menu"))
@@ -200,7 +200,7 @@ public class MenuHandler implements ContentHandler {
 			currentNode = 'c';
 		} else if(localName.equals("menu_item")){
 			
-			System.out.println("MenuXMLHandler.startElement - found a menu item");				
+			//System.out.println("MenuXMLHandler.startElement - found a menu item");				
 			menuItem = new MenuItem();
 			menuItem.setId(atts.getValue("id"));
 			currentNode = 'i';

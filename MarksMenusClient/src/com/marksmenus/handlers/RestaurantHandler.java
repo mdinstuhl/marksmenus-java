@@ -11,6 +11,7 @@ public class RestaurantHandler implements ContentHandler {
 
 	private Restaurant restaurant;
 	private String lastName;
+	private Menu menu;
 	
 	public RestaurantHandler() {
 		// TODO Auto-generated constructor stub
@@ -62,7 +63,6 @@ public class RestaurantHandler implements ContentHandler {
 	@Override
 	public void endElement(String arg0, String arg1, String arg2)
 			throws SAXException {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -119,6 +119,11 @@ public class RestaurantHandler implements ContentHandler {
 				//System.out.println("RestaurantXMLHandler.startElement - " + e.getMessage());
 			}
 */			
+		}else if(localName.equals("menu")){
+			//System.out.println("RestaurantXMLHandler.startElement - found a menu");
+			menu = new Menu();
+			menu.setId(atts.getValue("id"));
+			restaurant.getMenus().add(menu);
 		}
 
 	}

@@ -182,7 +182,7 @@ public class MarksMenus implements APIMap {
 	@Override
 	public MenuItem getMenuItem(int id) {
 		// Test URL http://www.marksmenus.com/menu_items/2354059
-		MenuItem menuItem = new MenuItem(id);
+		MenuItem menuItem = new MenuItem();
 
 		return menuItem;
 	}
