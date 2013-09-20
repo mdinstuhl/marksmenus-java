@@ -118,7 +118,7 @@ public class RestaurantHandler implements ContentHandler {
 			try{
 				restaurant.setId(Integer.getInteger(atts.getValue("id")));
 			} catch(Exception e){
-				System.out.println("RestaurantXMLHandler.startElement - " + e.getMessage());
+				//System.out.println("RestaurantXMLHandler.startElement - " + e.getMessage());
 			}
 		}
 
