@@ -20,6 +20,14 @@ public class MenuHandler implements ContentHandler {
 	String textValue = new String();
 	private Stack currentElement = new Stack();
 	boolean foundCData = false;	
+
+	public MenuHandler(Menu _menu){
+		menu = _menu;
+	}
+
+	public Menu getMenu(){
+		return this.menu;
+	}
 	
 	@Override
 	public void characters(char[] ch, int start, int length)
@@ -96,6 +104,7 @@ public class MenuHandler implements ContentHandler {
 			System.out.println("Rating for menu item " + menuItem.getName() + " has been set.");
 			
 		}else if(lastName.equals("price") && menuItem.getPrice().length() == 0){
+			System.out.println("About to set price.");
 			menuItem.setPrice(String.copyValueOf(ch,start,length));
 		}else if(lastName.equals("picture_url") && menuItem.getPictureURL().length() == 0){
 			menuItem.setPictureURL(String.copyValueOf(ch,start,length));

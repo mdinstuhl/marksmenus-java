@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Restaurant {
 
 	private String name = new String();
-	private int id;
+	private String id;
 	private double lat;
 	private double lng;
 	private String description = new String();
@@ -23,10 +23,10 @@ public class Restaurant {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public double getLat() {

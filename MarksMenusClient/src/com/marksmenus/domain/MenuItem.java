@@ -5,7 +5,7 @@ public class MenuItem {
 
 	private String id;
 	private String name = new String();
-	private String price;
+	private String price = new String();
 	private String description = new String();
 	private double rating;
 	private int ratingCount;

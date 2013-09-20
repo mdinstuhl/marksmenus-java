@@ -33,7 +33,7 @@ public class MarksMenusTest {
 	@Test
 	public void testFindRestaurantsByKeyword() {
 		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-		MarksMenus mmClient = new MarksMenus();
+		MarksMenus mmClient = new MarksMenus("internet.proxy.fedex.com",3128);
 		
 		try{
 			restaurants = mmClient.findRestaurantsByKeyword(35.1494, -90.0489, 5, "chicken");
@@ -51,7 +51,7 @@ public class MarksMenusTest {
 		Restaurant restaurant;
 		MarksMenus mmClient = new MarksMenus();
 		try{
-			restaurant = mmClient.getRestaurant(46);
+			restaurant = mmClient.getRestaurant("46");
 			
 			if(!restaurant.getName().equals("Boscos Squared")){
 				fail("No restaurant returned");
@@ -64,13 +64,19 @@ public class MarksMenusTest {
 
 	@Test
 	public void testGetMenu() {
-		fail("Not yet implemented");
+		Menu menu;
+		MarksMenus mmClient = new MarksMenus();
+		try{
+			menu = mmClient.getMenu("35004");
+			if(menu.getName().length() <= 0){
+				fail("No menu returned");
+			}
+		}
+		catch(Exception e){
+			fail(e.getMessage());
+		}
 	}
 
-	@Test
-	public void testGetMenuCategory() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testGetMenuItem() {

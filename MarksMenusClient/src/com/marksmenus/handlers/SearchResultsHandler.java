@@ -116,7 +116,7 @@ public class SearchResultsHandler implements ContentHandler {
 			//System.out.println("RestaurantXMLHandler.startElement - found a restaurant");
 			restaurant = new Restaurant();
 			try{
-				restaurant.setId(Integer.getInteger(atts.getValue("id")));
+				restaurant.setId(atts.getValue("id"));
 			} catch(Exception e){
 				//System.out.println("RestaurantXMLHandler.startElement - " + e.getMessage());
 			}
