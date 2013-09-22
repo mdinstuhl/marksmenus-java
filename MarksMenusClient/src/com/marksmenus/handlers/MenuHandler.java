@@ -9,7 +9,7 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
-public class MenuHandler implements ContentHandler {
+public class MenuHandler implements MMHandler {
 
 	
 	String lastName;
@@ -25,7 +25,7 @@ public class MenuHandler implements ContentHandler {
 		menu = _menu;
 	}
 
-	public Menu getMenu(){
+	public MMObject getMMObject(){
 		return this.menu;
 	}
 	

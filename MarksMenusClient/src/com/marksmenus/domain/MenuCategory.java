@@ -2,18 +2,12 @@ package com.marksmenus.domain;
 
 import java.util.ArrayList;
 
-public class MenuCategory {
+public class MenuCategory extends MMObject{
 
-	private String name = new String();
 	private String description = new String();
 	private ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	public String getDescription() {
 		return description;
 	}

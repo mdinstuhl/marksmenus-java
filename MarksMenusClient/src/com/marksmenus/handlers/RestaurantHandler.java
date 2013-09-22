@@ -7,7 +7,7 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
-public class RestaurantHandler implements ContentHandler {
+public class RestaurantHandler implements MMHandler {
 
 	private Restaurant restaurant;
 	private String lastName;
@@ -23,6 +23,10 @@ public class RestaurantHandler implements ContentHandler {
 	
 	public RestaurantHandler (Restaurant restaurant){
 		this.restaurant = restaurant;
+	}
+
+	public MMObject getMMObject(){
+		return this.restaurant;
 	}
 	
 	@Override

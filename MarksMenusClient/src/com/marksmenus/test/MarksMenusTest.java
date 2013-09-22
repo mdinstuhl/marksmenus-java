@@ -19,7 +19,7 @@ public class MarksMenusTest {
 	public void testFindRestuarantsByLocation() {
 		
 		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-		MarksMenus mmClient = new MarksMenus(proxy, proxyPort);
+		MarksMenus mmClient = new MarksMenus();
 		
 		try{
 			restaurants = mmClient.findRestuarantsByLocation(35.1494, -90.0489, 5);
@@ -36,7 +36,7 @@ public class MarksMenusTest {
 	@Test
 	public void testFindRestaurantsByKeyword() {
 		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-		MarksMenus mmClient = new MarksMenus(proxy, proxyPort);
+		MarksMenus mmClient = new MarksMenus();
 		
 		try{
 			restaurants = mmClient.findRestaurantsByKeyword(35.1494, -90.0489, 5, "chicken");
@@ -52,7 +52,7 @@ public class MarksMenusTest {
 	@Test
 	public void testGetRestaurant() {
 		Restaurant restaurant;
-		MarksMenus mmClient = new MarksMenus(proxy, proxyPort);
+		MarksMenus mmClient = new MarksMenus();
 		boolean hasMenus = false;
 		try{
 			restaurant = mmClient.getRestaurant("46");
@@ -76,7 +76,7 @@ public class MarksMenusTest {
 	@Test
 	public void testGetMenu() {
 		Menu menu;
-		MarksMenus mmClient = new MarksMenus(proxy, proxyPort);
+		MarksMenus mmClient = new MarksMenus();
 		try{
 			menu = mmClient.getMenu("35004");
 			if(menu.getName().length() <= 0){
@@ -91,7 +91,17 @@ public class MarksMenusTest {
 
 	@Test
 	public void testGetMenuItem() {
-		fail("Not yet implemented");
+		MenuItem menuItem;
+		MarksMenus mmClient = new MarksMenus();
+		try{
+			menuItem = mmClient.getMenuItem("2354059");
+			if(!menuItem.getName().equals("Hamburger")){
+				fail("Wrong menu item.");	
+			}			
+		}
+		catch(Exception e){
+			fail(e.getMessage());
+		}
 	}
 
 }

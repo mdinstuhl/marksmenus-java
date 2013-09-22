@@ -3,10 +3,8 @@ package com.marksmenus.domain;
 import java.util.ArrayList;
 
 
-public class Restaurant {
+public class Restaurant extends MMObject {
 
-	private String name = new String();
-	private String id;
 	private double lat;
 	private double lng;
 	private String description = new String();
@@ -17,18 +15,7 @@ public class Restaurant {
 	private String website = new String();
 	private ArrayList<Menu> menus = new ArrayList<Menu>();
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+
 	public double getLat() {
 		return lat;
 	}
