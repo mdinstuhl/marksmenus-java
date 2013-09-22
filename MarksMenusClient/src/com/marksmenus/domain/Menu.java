@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class Menu {
 
-	private int id;
+	private String id;
 	private String name = new String();
 	private String description = new String();
 	private ArrayList<MenuCategory> menuCategories = new ArrayList<MenuCategory>();
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {

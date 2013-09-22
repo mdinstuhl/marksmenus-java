@@ -12,17 +12,20 @@ import java.util.ArrayList;
 
 public class MarksMenusTest {
 
+	private String proxy = new String("");
+	private int proxyPort = 3128;
+
 	@Test
 	public void testFindRestuarantsByLocation() {
 		
 		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-		MarksMenus mmClient = new MarksMenus();
+		MarksMenus mmClient = new MarksMenus(proxy, proxyPort);
 		
 		try{
 			restaurants = mmClient.findRestuarantsByLocation(35.1494, -90.0489, 5);
 			if(restaurants.size() == 0){
 				fail("No restaurants returned");
-			} 
+			}
 		}
 		catch(Exception e){
 			fail(e.getMessage());
@@ -33,7 +36,7 @@ public class MarksMenusTest {
 	@Test
 	public void testFindRestaurantsByKeyword() {
 		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-		MarksMenus mmClient = new MarksMenus();
+		MarksMenus mmClient = new MarksMenus(proxy, proxyPort);
 		
 		try{
 			restaurants = mmClient.findRestaurantsByKeyword(35.1494, -90.0489, 5, "chicken");
@@ -48,18 +51,43 @@ public class MarksMenusTest {
 
 	@Test
 	public void testGetRestaurant() {
-		fail("Not yet implemented");
+		Restaurant restaurant;
+		MarksMenus mmClient = new MarksMenus(proxy, proxyPort);
+		boolean hasMenus = false;
+		try{
+			restaurant = mmClient.getRestaurant("46");
+			
+			if(!restaurant.getName().equals("Boscos Squared")){
+				fail("No restaurant returned");
+			}
+			for(Menu menu:restaurant.getMenus()){
+				hasMenus = true;
+				System.out.println(menu.getName());
+			}
+			if(!hasMenus){
+				fail("No menus returned.");
+			}
+		}
+		catch(Exception e){
+			fail(e.getMessage());
+		}
 	}
 
 	@Test
 	public void testGetMenu() {
-		fail("Not yet implemented");
+		Menu menu;
+		MarksMenus mmClient = new MarksMenus(proxy, proxyPort);
+		try{
+			menu = mmClient.getMenu("35004");
+			if(menu.getName().length() <= 0){
+				fail("No menu returned");
+			}
+		}
+		catch(Exception e){
+			fail(e.getMessage());
+		}
 	}
 
-	@Test
-	public void testGetMenuCategory() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testGetMenuItem() {

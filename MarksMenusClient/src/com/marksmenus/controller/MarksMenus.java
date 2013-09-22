@@ -17,7 +17,7 @@ import java.net.URLConnection;
 
 public class MarksMenus implements APIMap {
 
-	ContentHandler handler;
+	//ContentHandler handler;
 	String proxyURL;
 	int proxyPort;
 	boolean usesProxy = false;
@@ -43,7 +43,7 @@ public class MarksMenus implements APIMap {
 		URLConnection conn;
 		String url = new String();
 		XMLReader xmlReader;
-		handler = new RestaurantHandler(restaurants);
+		SearchResultsHandler handler = new SearchResultsHandler(restaurants);
 		// Limit distance to <= 5.  This prevents the server from getting hammered.
 		if(distance > 5){
 			distance = 5;
@@ -63,7 +63,7 @@ public class MarksMenus implements APIMap {
 			xmlReader.setContentHandler(handler);
 			xmlReader.parse(new InputSource(conn.getInputStream()));
 			// Get the populated arraylist back from the handler.
-			
+
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -81,7 +81,7 @@ public class MarksMenus implements APIMap {
 		URLConnection conn;
 		String url = new String();
 		XMLReader xmlReader;
-		handler = new RestaurantHandler(restaurants);
+		SearchResultsHandler handler = new SearchResultsHandler(restaurants);
 		// Limit distance to <= 5.  This prevents the server from getting hammered.
 		if(distance > 5){
 			distance = 5;
@@ -112,15 +112,65 @@ public class MarksMenus implements APIMap {
 	}
 
 	@Override
-	public Restaurant getRestaurant(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Restaurant getRestaurant(String id) {
+		Restaurant restaurant = new Restaurant();
+		
+		URL addr;
+		URLConnection conn;
+		String url = new String();
+		XMLReader xmlReader;
+		RestaurantHandler handler = new RestaurantHandler(restaurant);
+		
+		// Populate the query string, create the reader and make the request to the server
+		try{
+			url = "http://www.marksmenus.com/restaurants/" + id + ".xml";     //98616 = BBQ Shop
+			restaurant.setId(id);
+			addr = new URL(url);
+			System.out.println(url);
+			if(this.usesProxy){
+			  conn = addr.openConnection(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(this.proxyURL, this.proxyPort)));
+			} else {
+				conn = addr.openConnection();	
+			}
+			xmlReader = XMLReaderFactory.createXMLReader();
+			xmlReader.setContentHandler(handler);
+			xmlReader.parse(new InputSource(conn.getInputStream()));
+			// Get the populated restaurant back from the handler.
+			restaurant = handler.getRestaurant();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}		
+		
+		return restaurant;
 	}
 
 	@Override
-	public Menu getMenu(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Menu getMenu(String id) {
+		Menu menu = new Menu();
+		URL addr;
+		URLConnection conn;
+		String url = new String();
+		XMLReader xmlReader;
+		MenuHandler handler = new MenuHandler(menu);
+		try{
+			url = "http://www.marksmenus.com/restaurants/" + id + ".xml";
+			menu.setId(id);
+			addr = new URL(url);
+			if(this.usesProxy){
+			  conn = addr.openConnection(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(this.proxyURL, this.proxyPort)));				
+			} else {
+			  conn = addr.openConnection();
+			}
+			xmlReader = XMLReaderFactory.createXMLReader();
+			xmlReader.setContentHandler(handler);
+			xmlReader.parse(new InputSource(conn.getInputStream()));
+			menu = handler.getMenu();			
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return menu;
 	}
 
 	@Override
@@ -131,8 +181,10 @@ public class MarksMenus implements APIMap {
 
 	@Override
 	public MenuItem getMenuItem(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		// Test URL http://www.marksmenus.com/menu_items/2354059
+		MenuItem menuItem = new MenuItem();
+
+		return menuItem;
 	}
 
 }

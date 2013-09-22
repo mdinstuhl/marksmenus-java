@@ -1,0 +1,72 @@
+<project name="MarksMenusClient" default="dist" basedir=".">
+    <description>
+	This will build the MarksMenusClient
+    </description>
+  <property name="src" location="src" />
+  <property name="bin" location="bin" />
+  <property name="dist" location="dist" />
+  <property name="java.lib" location="/usr/share/java" /> <!-- Edit this for your local system -->
+  <property name="ant.lib" location="/usr/share/ant/lib" />
+  <property name="junit4.jar" location="lib/ant-junit4-1.8.2.jar" /> 
+  <property name="junit.jar" location="lib/junit.jar" />
+  <property name="project.name" value="MarksMenusClient" />
+
+  <path id="lib.classpath">
+    <fileset dir="lib">
+      <include name="**/*.jar" />
+    </fileset>
+  </path>
+  <path id="junit.classpath">
+    <fileset dir="${java.lib}">
+      <include name="**/*.jar" />
+    </fileset>
+  </path>
+  <path id="ant.classpath">
+    <fileset dir="${ant.lib}">
+      <include name="**/*.jar" />
+    </fileset>
+  </path>
+  <path id="tests">
+    <fileset dir="${src}/tests">
+      <include name="*Test.java" />
+    </fileset>
+  </path>
+  <path id="application" location="${dist}/{project.name}.jar" />
+  <echo>
+    Classpath is set as ${junit.jar}
+    Project name is ${project.name}
+  </echo>
+  <target name="clean">
+    <delete dir="${bin}" />
+    <delete dir="test-results" />
+  </target>
+  <target name="compile" depends="clean">
+    <mkdir dir="${bin}" />
+    <javac srcdir="${src}" destdir="${bin}" includeantruntime="false">
+      <classpath refid="lib.classpath" />
+      <classpath refid="junit.classpath" />
+      <classpath refid="ant.classpath" />
+    </javac>
+  </target>
+  <target name="package" depends="compile">
+    <tstamp />
+    <delete dir="${dist}" />
+    <mkdir dir="${dist}" />
+    <jar destfile="${dist}/${project.name}.jar" basedir="${bin}" />
+  </target>
+  <target name="test" depends="package">
+    <mkdir dir="test-results" />
+    <junit printsummary="yes" showoutput="true" haltOnError="false">
+      <classpath>
+        <path refid="lib.classpath" />
+        <path refid="application" />
+        <fileset dir="${dist}">
+          <include name="**/${project.name}.jar" />
+        </fileset>
+      </classpath>
+      <formatter type="plain" />
+      <test name="com.marksmenus.test.MarksMenusTest" todir="test-results" />
+    </junit>
+  </target>
+</project>
+
