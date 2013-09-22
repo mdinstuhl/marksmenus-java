@@ -8,7 +8,7 @@ As a rule, RESTful APIs are self-documenting.  Here are a few examples from the 
 
 In order to get a restaurant from the web service, simple use the following URL:
 
-http://www.marksmenus.com/restaurants/<restaurant_id>.xml
+http://www.marksmenus.com/restaurants/(restaurant_id).xml
 
 This will return an XML-formatted restaurant.  From there, the restaurant object can be parsed and put into an object model of your chosing.
 
